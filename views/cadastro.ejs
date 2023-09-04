@@ -1,0 +1,59 @@
+<div class="flex items-center justify-center">
+  <div class="bg-white p-8 rounded shadow-md w-96 m-10">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Cadastro de Usuário</h2>
+    <form>
+
+      <div class="mb-4">
+        <div class="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
+          <img id="profileImage" src="default-profile-image.jpg" alt="Foto de perfil padrão" class="object-cover w-full h-full" />
+          <input type="file" id="profilePicture" name="profilePicture" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" onchange="updateProfileImage(this)" />
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-medium">Nome</label>
+        <input type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-medium">Email</label>
+        <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-medium">Senha</label>
+        <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="confirmPassword" class="block text-gray-700 font-medium">Confirme a senha</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+      </div>
+
+      <div class="mt-6">
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-full">
+          Registrar
+        </button>
+      </div>
+      
+    </form>
+  </div>
+
+  <script>
+    function updateProfileImage(input) {
+      const profileImage = document.getElementById('profileImage');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    document.getElementById('profilePicture').addEventListener('click', function() {
+      // Abrir o diálogo de seleção de arquivo quando a imagem de perfil for clicada
+      this.value = null; // Isso permite que o mesmo arquivo seja selecionado novamente
+    });
+  </script>
+</div>

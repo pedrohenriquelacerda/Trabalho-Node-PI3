@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title><%= title %></title>
+</head>
+
+<body class="bg-slate-100 flex flex-col min-h-screen">
+
+  <header>
+    <nav class="p-4 bg-gray-800">
+      <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo com link (lado esquerdo) -->
+        <a href="#" class="text-xl font-bold text-">
+          <img src="" alt="" class="h-12" />
+        </a>
+
+        <!-- Links de navegação (lado direito) -->
+        <div class="space-x-4">
+          <a href="#" class="text-white hover:text-">Login</a>
+          <a href="#" class="text-white hover:text-yellow-300">Cadastro</a>
+          <a href="#" class="text-white hover:text-yellow-300">Perfil</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow">
+    <%- body %>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-2">
+    <div class="container mx-auto text-center">
+      <p>
+        &copy; <%= new Date().getFullYear() %> Minha Empresa. Todos os
+        direitos reservados.
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>
