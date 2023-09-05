@@ -1,45 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= title %></title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <title><%= title %></title>
-</head>
+  <body class="bg-gray-200 flex flex-col min-h-screen">
+    <header>
+      <nav class="bg-gray-800 p-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center space-x-2">
+            <img src="" alt="Logo" class="w-10 h-10" />
+            <span class="text-white text-2xl font-semibold">Seu Site</span>
+          </div>
 
-<body class="bg-slate-100 flex flex-col min-h-screen">
+          <!-- Dropdown com a foto de perfil -->
+          <div class="relative group inline-block ">
+            <div
+              class=" rounded-full overflow-hidden bg-gray-800"
+            >
+              <button
+                class="bg-gray-800 p-2 rounded-full"
+                aria-haspopup="true"
+              >
+                <img
+                  src="/images/default.png"
+                  alt="Foto de perfil"
+                  class=" w-10 h-10 rounded-full"
+                />
+              </button>
+            </div>
+          
+            <!-- Conteúdo do dropdown -->
+            <ul
+              class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0"
+            >
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Perfil</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Configurações</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Sair</a>
+              </li>
+            </ul>
+          </div>
+      </nav>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const profileDropdown = document.querySelector(".group");
+          const dropdownContent = profileDropdown.querySelector("ul");
 
-  <header>
-    <nav class="p-4 bg-gray-800">
-      <div class="container mx-auto flex items-center justify-between">
-        <!-- Logo com link (lado esquerdo) -->
-        <a href="#" class="text-xl font-bold text-">
-          <img src="" alt="" class="h-12" />
-        </a>
+          // Abra o dropdown quando o botão for clicado
+          profileDropdown.addEventListener("click", function () {
+            dropdownContent.classList.toggle("hidden");
+          });
 
-        <!-- Links de navegação (lado direito) -->
-        <div class="space-x-4">
-          <a href="#" class="text-white hover:text-">Login</a>
-          <a href="#" class="text-white hover:text-yellow-300">Cadastro</a>
-          <a href="#" class="text-white hover:text-yellow-300">Perfil</a>
-        </div>
+          // Feche o dropdown quando clicar fora dele
+          document.addEventListener("click", function (event) {
+            if (!profileDropdown.contains(event.target)) {
+              dropdownContent.classList.add("hidden");
+            }
+          });
+        });
+      </script>
+    </header>
+
+    <main class="flex-grow"><%- body %></main>
+
+    <footer class="bg-gray-800 text-white p-2">
+      <div class="container mx-auto text-center">
+        <p>&copy; <%= new Date().getFullYear() %> Pedro Henrique Lacerda</p>
       </div>
-    </nav>
-  </header>
-
-  <main class="flex-grow">
-    <%- body %>
-  </main>
-
-  <footer class="bg-gray-800 text-white p-2">
-    <div class="container mx-auto text-center">
-      <p>
-        &copy; <%= new Date().getFullYear() %> Minha Empresa. Todos os
-        direitos reservados.
-      </p>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>

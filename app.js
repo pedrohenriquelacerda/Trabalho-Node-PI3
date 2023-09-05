@@ -1,47 +1,87 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var expressLayouts = require('express-ejs-layouts'); // Importe o express-ejs-layouts
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const expressLayouts = require("express-ejs-layouts");
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
+const createError = require("http-errors");
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const loginRouter = require("./routes/login");
+const cadastroRouter = require("./routes/cadastro");
 
-var app = express();
+const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// Middleware para configurar variável global "title"
+app.use((req, res, next) => {
+  res.locals.title = 'Título Padrão';
+  next();
+});
+
+// Configuração de views e layout
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use(expressLayouts);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// Configuração de sessão
+app.use(
+  session({
+    secret: "2C44-4D44-WppQ38S", //configure um segredo seu aqui,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 60 * 1000 }, 
+  })
+);
 
-app.use(logger('dev'));
+// Inicialização do Passport
+require("./auth")(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Configuração de logs e parsers
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// Rotas públicas (sem autenticação)
+app.use("/login", loginRouter);
+app.use("/cadastro", cadastroRouter);
+
+// Middleware de autenticação
+function authenticationMiddleware(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  if (req.path === '/login') return next(); // Evita redirecionamento se já estiver na página de login
+  res.redirect('/login?erro=1');
+}
+
+// Rotas protegidas (requerem autenticação)
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+// Aplicação de middleware de autenticação após as rotas públicas
+app.use(authenticationMiddleware);
+
+// Tratamento de erros 404
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
+// Tratamento de erros
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;
