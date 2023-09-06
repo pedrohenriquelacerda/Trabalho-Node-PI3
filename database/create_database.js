@@ -8,10 +8,17 @@ var con = mysql.createConnection({
 con.connect(function (err) {
   if (err) throw err;
   console.log("Conectado!");
-  var sql = "CREATE DATABASE node";
-  con.query(sql, function (err, result) {
+
+  var createDbSql = "CREATE DATABASE IF NOT EXISTS node";
+  con.query(createDbSql, function (err, result) {
     if (err) throw err;
-    console.log("Base de dados criada");
+
+    if (result.warningCount === 0) {
+      console.log("Base de dados criada");
+    } else {
+      console.log("Erro ao criar o banco de dados");
+    }
   });
+
   con.end();
 });

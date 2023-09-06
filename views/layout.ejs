@@ -9,7 +9,7 @@
 
   <body class="bg-gray-200 flex flex-col min-h-screen">
     <header>
-      <nav class="bg-gray-800 p-4">
+      <nav class="bg-gray-800 p-3">
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <div class="flex items-center space-x-2">
@@ -18,22 +18,17 @@
           </div>
 
           <!-- Dropdown com a foto de perfil -->
-          <div class="relative group inline-block ">
-            <div
-              class=" rounded-full overflow-hidden bg-gray-800"
-            >
-              <button
-                class="bg-gray-800 p-2 rounded-full"
-                aria-haspopup="true"
-              >
+          <div class="relative group inline-block">
+            <div class="rounded-full overflow-hidden bg-gray-800">
+              <button class="bg-gray-800 p-2 rounded-full" aria-haspopup="true">
                 <img
                   src="/images/default.png"
                   alt="Foto de perfil"
-                  class=" w-10 h-10 rounded-full"
+                  class="w-10 h-10 rounded-full"
                 />
               </button>
             </div>
-          
+
             <!-- Conteúdo do dropdown -->
             <ul
               class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0"
@@ -42,14 +37,18 @@
                 <a href="#" class="block px-4 py-2 hover:bg-gray-300">Perfil</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Configurações</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300"
+                  >Configurações</a
+                >
               </li>
               <li>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-300">Sair</a>
               </li>
             </ul>
           </div>
+        </div>
       </nav>
+
       <script>
         document.addEventListener("DOMContentLoaded", function () {
           const profileDropdown = document.querySelector(".group");

@@ -7,8 +7,8 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const createError = require("http-errors");
 
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -19,7 +19,7 @@ const app = express();
 
 // Middleware para configurar variável global "title"
 app.use((req, res, next) => {
-  res.locals.title = 'Título Padrão';
+  res.locals.title = "Título Padrão";
   next();
 });
 
@@ -32,10 +32,17 @@ app.use(expressLayouts);
 // Configuração de sessão
 app.use(
   session({
+    store: new MySQLStore({
+      host: "localhost",
+      port: "3306",
+      user: "root",
+      password: "",
+      database: "node",
+    }),
     secret: "2C44-4D44-WppQ38S", //configure um segredo seu aqui,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 60 * 1000 }, 
+    cookie: { maxAge: 30 * 60 * 1000 }, //30min
   })
 );
 
@@ -57,13 +64,13 @@ app.use("/cadastro", cadastroRouter);
 // Middleware de autenticação
 function authenticationMiddleware(req, res, next) {
   if (req.isAuthenticated()) return next();
-  if (req.path === '/login') return next(); // Evita redirecionamento se já estiver na página de login
-  res.redirect('/login?erro=1');
+  if (req.path === "/login") return next(); // Evita redirecionamento se já estiver na página de login
+  res.redirect("/login?erro=1");
 }
 
 // Rotas protegidas (requerem autenticação)
-app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use("/", authenticationMiddleware ,indexRouter);
+app.use("/user", authenticationMiddleware, usersRouter);
 
 // Aplicação de middleware de autenticação após as rotas públicas
 app.use(authenticationMiddleware);
