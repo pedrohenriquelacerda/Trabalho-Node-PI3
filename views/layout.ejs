@@ -14,39 +14,54 @@
           <!-- Logo -->
           <div class="flex items-center space-x-2">
             <img src="" alt="Logo" class="w-10 h-10" />
-            <span class="text-white text-2xl font-semibold">Seu Site</span>
+            <span class="text-white text-2xl font-semibold">Sei lá</span>
           </div>
 
-          <!-- Dropdown com a foto de perfil -->
-          <div class="relative group inline-block">
-            <div class="rounded-full overflow-hidden bg-gray-800">
-              <button class="bg-gray-800 p-2 rounded-full" aria-haspopup="true">
-                <img
-                  src="/imagens/<%=userPhoto%>"
-                  alt="Foto de perfil"
-                  class="w-10 h-10 rounded-full"
-                />
-              </button>
-            </div>
+          <!-- Links no lado direito com margem -->
+          <div class="flex items-center space-x-4 mr-4">
+            <!-- Adicionei a classe 'mr-4' para a margem à direita -->
+            <!-- Primeiro link -->
+            <a href="#" class="text-white">Link 1</a>
 
-            <!-- Conteúdo do dropdown -->
-            <ul
-              class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0"
-            >
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Perfil</a>
-              </li>
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-300"
-                  >Configurações</a
+            <!-- Segundo link -->
+            <a href="#" class="text-white">Link 2</a>
+
+            <!-- Dropdown com a foto de perfil -->
+            <div class="relative group inline-block">
+              <div class="rounded-full overflow-hidden bg-gray-800">
+                <button
+                  class="bg-gray-800 p-2 rounded-full"
+                  aria-haspopup="true"
                 >
-              </li>
-              <li>
-                <a href="/logout" class="block px-4 py-2 hover:bg-gray-300"
-                  >Sair</a
-                >
-              </li>
-            </ul>
+                  <img
+                    src="/imagens/<%=userPhoto%>"
+                    alt="Foto de perfil"
+                    class="w-10 h-10 rounded-full"
+                  />
+                </button>
+              </div>
+
+              <!-- Conteúdo do dropdown -->
+              <ul
+                class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0"
+              >
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-300"
+                    >Perfil</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-300"
+                    >Configurações</a
+                  >
+                </li>
+                <li>
+                  <a href="/logout" class="block px-4 py-2 hover:bg-gray-300"
+                    >Sair</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
