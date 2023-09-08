@@ -1,6 +1,6 @@
 const database = require("../db");
 const Sequelize = require("sequelize");
-const Usuario = database.define("usuario", {
+const Usuarios = database.define("usuarios", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -13,4 +13,4 @@ const Usuario = database.define("usuario", {
   imagem: { type: Sequelize.STRING, allowNull: true },
 });
 
-module.exports = Usuario;
+module.exports = Usuarios;

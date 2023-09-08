@@ -22,7 +22,7 @@
             <div class="rounded-full overflow-hidden bg-gray-800">
               <button class="bg-gray-800 p-2 rounded-full" aria-haspopup="true">
                 <img
-                  src="/images/default.png"
+                  src="/imagens/<%=userPhoto%>"
                   alt="Foto de perfil"
                   class="w-10 h-10 rounded-full"
                 />
@@ -42,13 +42,14 @@
                 >
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Sair</a>
+                <a href="/logout" class="block px-4 py-2 hover:bg-gray-300"
+                  >Sair</a
+                >
               </li>
             </ul>
           </div>
         </div>
       </nav>
-
       <script>
         document.addEventListener("DOMContentLoaded", function () {
           const profileDropdown = document.querySelector(".group");

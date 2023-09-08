@@ -2,10 +2,10 @@
   <div class="bg-white p-8 rounded shadow-md w-96 m-10">
     <h2 class="text-2xl font-semibold mb-4 text-center">Cadastro de Usuário</h2>
 
-    <form action="/cadastro" method="POST">
+    <form action="/cadastro" method="POST" enctype="multipart/form-data">
       <div class="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
-        <input type="file" id="profilePicture" name="profilePicture" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" onchange="updateProfileImage(this)" />
-        <img id="profileImage" src="/images/default.png" alt="" class="object-cover w-full h-full" />
+        <input type="file" id="profilePicture" name="imagem" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" onchange="updateProfileImage(this)" />
+        <img id="profileImage" src="/imagens/default.png" alt="" class="object-cover w-full h-full" />
         <label for="profilePicture" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

@@ -2,11 +2,17 @@
   <div class="bg-white p-8 rounded shadow-md w-96 m-10">
     <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
 
-    <% if(mensagem) { %>
-    <p class="font-semibold mb-4 text-center text-red-500 bg-red-100 p-2 rounded">
-      <%= mensagem %>
+    <% if(mensagemErro) { %>
+    <p class="font-semibold mb-4 text-center text-red-600 bg-red-200 p-2 rounded">
+      <%= mensagemErro %>
     </p>
     <% } %>
+
+    <% if(mensagemSucesso) { %>
+      <p class="font-semibold mb-4 text-center text-green-600 bg-green-200 p-2 rounded">
+        <%= mensagemSucesso %>
+      </p>
+      <% } %>
 
     <form action="/login" method="post">
       <div class="mb-4">
@@ -20,7 +26,7 @@
       </div>
 
       <div class="mb-6">
-        <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full">
+        <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded  hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full">
           Entrar
         </button>
       </div>
@@ -28,7 +34,8 @@
       <hr class="mb-4 border-t" />
 
       <div class="flex flex-col items-center md:flex-row md:items-center justify-center space-y-2 md:space-y-0 md:space-x-2">
-        <button type="button" class="flex items-center px-3 py-2 md:px-4 md:py-2 md:w-auto border-1 bg-gray-900 border-gray-600 text-white rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-500">
+
+        <a href="/login/google" class="flex items-center px-3 py-2 md:px-4 md:py-2 md:w-auto border-1 bg-gray-800 text-white rounded-full hover:bg-gray-900 focus:outline-none focus:bg-gray-900">
           <svg width="1.25rem" height="1.25rem" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="mr-1">
             <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="Color-" transform="translate(-401.000000, -860.000000)">
@@ -42,9 +49,9 @@
             </g>
           </svg>
           Entrar com Google
-        </button>
+        </a>
 
-        <a href="/cadastro" class="px-3 py-2 md:px-4 md:py-2 bg-gray-900 border-gray-600 text-white rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-500 md:w-auto mt-2 md:mt-0">
+        <a href="/cadastro" class="px-3 py-2 md:px-4 md:py-2 bg-gray-800 text-white rounded-full hover:bg-gray-900 focus:outline-none focus:bg-gray-900 md:w-auto mt-2 md:mt-0">
           Cadastre-se
         </a>
       </div>

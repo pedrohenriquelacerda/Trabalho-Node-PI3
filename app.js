@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const router = express.Router();
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
@@ -14,14 +15,39 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const cadastroRouter = require("./routes/cadastro");
+const googleRouter = require("./routes/google");
+const logoutRouter = require("./routes/logout");
 
 const app = express();
 
 // Middleware para configurar variável global "title"
 app.use((req, res, next) => {
-  res.locals.title = "Título Padrão";
+  res.locals.title = "Erro";
+  res.locals.userPhoto = "default.png";
   next();
 });
+
+(async () => {
+  const database = require("./db");
+  try {
+    const resultado = await database.sync();
+    console.log(resultado);
+  } catch (error) {
+    console.log(error);
+  }
+})();
+
+// Middleware de autenticação
+function authenticationMiddleware(req, res, next) {
+  if (req.isAuthenticated() && req.user && req.user.imagem) {
+    const userPhoto = req.user.imagem;
+    res.locals.userPhoto = userPhoto;
+  }
+  if (req.isAuthenticated()) return next();
+  if (req.path == "/google/callback") return next();
+  if (req.path === "/login") return next(); // Evita redirecionamento se já estiver na página de login
+  res.redirect("/login?erro=1");
+}
 
 // Configuração de views e layout
 app.use(express.static(path.join(__dirname, "public")));
@@ -58,18 +84,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Rotas públicas (sem autenticação)
+app.use("/google", googleRouter);
 app.use("/login", loginRouter);
 app.use("/cadastro", cadastroRouter);
-
-// Middleware de autenticação
-function authenticationMiddleware(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  if (req.path === "/login") return next(); // Evita redirecionamento se já estiver na página de login
-  res.redirect("/login?erro=1");
-}
+app.use("/logout", logoutRouter);
 
 // Rotas protegidas (requerem autenticação)
-app.use("/", authenticationMiddleware ,indexRouter);
+app.use("/", authenticationMiddleware, indexRouter);
 app.use("/user", authenticationMiddleware, usersRouter);
 
 // Aplicação de middleware de autenticação após as rotas públicas

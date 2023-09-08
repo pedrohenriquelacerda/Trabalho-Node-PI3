@@ -1,19 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 router.get("/", (req, res, next) => {
-  let mensagem = null;
-  
+  let mensagemErro = null;
+  let mensagemSucesso = null;
   if (req.query.erro == 1) {
-    mensagem = "É necessário realizar login";
-    
+    mensagemErro = "É necessário realizar login";
   } else if (req.query.erro == 2) {
-    mensagem = "Email e/ou senha incorretos!";
+    mensagemErro = "Email e/ou senha incorretos!";
+  } else if (req.query.erro == 4) {
+    mensagemErro = "Erro ao realizar login!";
+  } else if (req.query.erro == 0){
+    mensagemSucesso = "Cadastro realizado com sucesso";
   }
-  
-  res.render("login", { title: "Login", mensagem });
+
+  res.render("login", { title: "Login", mensagemErro, mensagemSucesso});
 });
+
+router.get("/google", (req, res, next) => {
+  passport.authenticate("google", {
+    scope: ["email", "profile"],
+  })(req, res, next);
+
+  console.log(res.data);
+});
+
+
 
 router.post(
   "/",
