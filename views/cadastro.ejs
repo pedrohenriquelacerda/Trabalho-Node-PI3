@@ -1,62 +1,120 @@
-<div class="flex items-center justify-center">
+<div class="grid-cols-1 sm:grid md:grid-cols-4">
   <div class="bg-white p-8 rounded shadow-md w-96 m-10">
     <h2 class="text-2xl font-semibold mb-4 text-center">Cadastro de Usuário</h2>
 
     <form action="/cadastro" method="POST" enctype="multipart/form-data">
       <div class="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
-        <input type="file" id="profilePicture" name="imagem" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" onchange="updateProfileImage(this)" />
-        <img id="profileImage" src="/imagens/default.png" alt="" class="object-cover w-full h-full" />
-        <label for="profilePicture" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        <input
+          type="file"
+          id="profilePicture"
+          name="imagem"
+          class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          accept="image/*"
+          onchange="updateProfileImage(this)"
+        />
+        <img
+          id="profileImage"
+          src="/imagens/default.png"
+          alt=""
+          class="object-cover w-full h-full"
+        />
+        <label
+          for="profilePicture"
+          class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-10 w-10 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            ></path>
           </svg>
         </label>
       </div>
 
       <div class="mb-4">
         <label for="name" class="block text-gray-700 font-medium">Nome</label>
-        <input type="text" id="name" name="nome" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+        <input
+          type="text"
+          id="name"
+          name="nome"
+          class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+          required
+        />
       </div>
 
       <div class="mb-4">
         <label for="email" class="block text-gray-700 font-medium">Email</label>
-        <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+          required
+        />
       </div>
 
       <div class="mb-4">
-        <label for="password" class="block text-gray-700 font-medium">Senha</label>
-        <input type="password" id="password" name="senha" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+        <label for="password" class="block text-gray-700 font-medium"
+          >Senha</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="senha"
+          class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+          required
+        />
       </div>
 
       <div class="mb-4">
-        <label for="confirmPassword" class="block text-gray-700 font-medium">Confirme a senha</label>
-        <input type="password" id="rsenha" name="confirmPassword" class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500" required />
+        <label for="confirmPassword" class="block text-gray-700 font-medium"
+          >Confirme a senha</label
+        >
+        <input
+          type="password"
+          id="rsenha"
+          name="confirmPassword"
+          class="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+          required
+        />
       </div>
 
       <div class="mt-6">
-        <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full">
+        <button
+          type="submit"
+          class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full"
+        >
           Cadastrar
         </button>
       </div>
-
     </form>
   </div>
 
   <script>
     function updateProfileImage(input) {
-      const profileImage = document.getElementById('profileImage');
+      const profileImage = document.getElementById("profileImage");
       if (input.files && input.files[0]) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           profileImage.src = e.target.result;
         };
         reader.readAsDataURL(input.files[0]);
       }
     }
 
-    document.getElementById('profilePicture').addEventListener('click', function() {
-      // Abrir o diálogo de seleção de arquivo quando a imagem de perfil for clicada
-      this.value = null; // Isso permite que o mesmo arquivo seja selecionado novamente
-    });
+    document
+      .getElementById("profilePicture")
+      .addEventListener("click", function () {
+        // Abrir o diálogo de seleção de arquivo quando a imagem de perfil for clicada
+        this.value = null; // Isso permite que o mesmo arquivo seja selecionado novamente
+      });
   </script>
 </div>

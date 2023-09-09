@@ -18,6 +18,7 @@ const loginRouter = require("./routes/login");
 const cadastroRouter = require("./routes/cadastro");
 const googleRouter = require("./routes/google");
 const logoutRouter = require("./routes/logout");
+const capivaraRouter = require("./routes/capivara");
 
 const app = express();
 
@@ -98,6 +99,8 @@ app.use("/logout", logoutRouter);
 // Rotas protegidas (requerem autenticação)
 app.use("/", authenticationMiddleware, indexRouter);
 app.use("/user", authenticationMiddleware, usersRouter);
+app.use("/capivara", authenticationMiddleware, capivaraRouter);
+
 
 // Aplicação de middleware de autenticação após as rotas públicas
 app.use(authenticationMiddleware);
