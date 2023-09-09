@@ -7,6 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const createError = require("http-errors");
+const Capivaras = require("./models/capivaras");
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -24,6 +25,7 @@ const app = express();
 app.use((req, res, next) => {
   res.locals.title = "Erro";
   res.locals.userPhoto = "default.png";
+  res.locals.logged = false;
   next();
 });
 
@@ -40,10 +42,14 @@ app.use((req, res, next) => {
 // Middleware de autenticação
 function authenticationMiddleware(req, res, next) {
   if (req.isAuthenticated() && req.user && req.user.imagem) {
-    const userPhoto = req.user.imagem;
+    var userPhoto = req.user.imagem;
+    res.locals.logged = true;
     res.locals.userPhoto = userPhoto;
   }
-  if (req.isAuthenticated()) return next();
+  if (req.isAuthenticated()) {
+    res.locals.logged = true;
+    return next();
+  }
   if (req.path == "/google/callback") return next();
   if (req.path === "/login") return next(); // Evita redirecionamento se já estiver na página de login
   res.redirect("/login?erro=1");

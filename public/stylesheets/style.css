@@ -610,6 +610,10 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -712,12 +716,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
