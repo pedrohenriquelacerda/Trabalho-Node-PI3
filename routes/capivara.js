@@ -13,4 +13,6 @@ router.get("/cadastrar", function (req, res, next) {
   });
 });
 
+router.post("/cadastrar", function (req, res, next) {});
+
 module.exports = router;

@@ -1,13 +1,12 @@
 const express = require("express");
 const path = require("path");
-const router = express.Router();
+const formidable = require("formidable");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const createError = require("http-errors");
-const Capivaras = require("./models/capivaras");
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -39,6 +38,11 @@ app.use((req, res, next) => {
     console.log(error);
   }
 })();
+
+// Configurando o formidable
+
+formidable.defaultOptions.allowEmptyFiles = true;
+formidable.defaultOptions.minFileSize = 0;
 
 // Middleware de autenticação
 function authenticationMiddleware(req, res, next) {

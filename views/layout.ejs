@@ -1,109 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title><%= title %></title>
-  </head>
 
-  <body class="bg-gray-200 flex flex-col min-h-screen">
-    <header>
-      <nav class="bg-gray-800 p-3">
-        <div class="flex items-center justify-between">
-          <!-- Logo -->
-          <div class="flex items-center space-x-4 ml-1">
-            <a href="/">
-              <img
-                alt="Logo"
-                class="w-15 h-15"
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC+klEQVR4nO2ZW4hNURiAzzGIGeOapMilIZOHMSLXiUIYnDAePCAapYZ4GaNQSN4IuTSEpMSDvClGDVGUDOXBlIwHYxqM2wPj0pn5tOrfWS37nLMv58zZe9rf43/2+f/17bP22mv9JxaLiIiI6PUAM4BaYC3QJxZGgA1AN/+4CcRjQQcoBqYA84AE8Ib/KY8FDWAssA24Abw27n4q9sSCABAH1gP3HQ7c5A+wPN8ShcBd/PMdmJlPkeMOBjkXmO/guo9ASb5E2hwMUElU4Az1XI1yUHcqUAOcBRrlex3AL+AH8BZoAs7LtB/uREatSNnkqVrtjBrjgGrgKtDuceoeTXuTHE4bt7wEjgFngOYs5v0ELLaTOEX4SAJbTZFNhJMksFQXGS/BMNIGDDF/FbV0hpHD5hQrB74SPr4AA0yZMUCdrO3XgQZ56zcGXHJNxneMJjkaeEcwOelYRGTWEUyeuBIRmVsEj89eRCYBPwkGTcAOoMy1iMgcCsD7Y6WnwRsiA1MceXuCZmCkjKMI2OirZwCsyIPEN7WLlvqVsu0/kY1fpr6HRfZJ3dnAb4kt8CNQoE0x9bLsKUqk7gOtV1DoR6TU6pzImf8S0JVjiQ6tPWU1SF55lpBksyRZtRaryLFMq9SZrMVe+BVZoiW7CAyV+KMcirRLjRFa7INfkSqjyC6J78+hSLd19gBatPhEPyKbjSJ3JD7NZgDqgSxykbcr0y4XOKfFDvoR2WkUUC2cQdKxbLUZwEIXuWvSdDsr5ZoLWqzBj8gRmyKrbe6WRZ3L/LU2OdQJti/QTzopFlv8iDy2KVQvn6mOvckVl/kX2eQ4LZ+t0mLqfNTfq8SEFM2K7Wl6ZM9c5I8Dl21yzJHPr2mx3V4llsn+xm4PpJ6R6dL6NOl0kLtAWqPPbb7fIoLF0k61ag72IpFIs6KojmJZmnPKewf5H5KhUyI7XYu9riW0udlpFEhKg2KYiKi7ZKJWsYSD/PdSSKibVyrX3JaH/kBo/7uMiIiI6F38BRTvpmfpCYx6AAAAAElFTkSuQmCC"
-              />
-            </a>
-            <a href="/">
-              <span class="text-white text-2xl font-semibold">CAPIVÁRIAS</span>
-            </a>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC+klEQVR4nO2ZW4hNURiAzzGIGeOapMilIZOHMSLXiUIYnDAePCAapYZ4GaNQSN4IuTSEpMSDvClGDVGUDOXBlIwHYxqM2wPj0pn5tOrfWS37nLMv58zZe9rf43/2+f/17bP22mv9JxaLiIiI6PUAM4BaYC3QJxZGgA1AN/+4CcRjQQcoBqYA84AE8Ib/KY8FDWAssA24Abw27n4q9sSCABAH1gP3HQ7c5A+wPN8ShcBd/PMdmJlPkeMOBjkXmO/guo9ASb5E2hwMUElU4Az1XI1yUHcqUAOcBRrlex3AL+AH8BZoAs7LtB/uREatSNnkqVrtjBrjgGrgKtDuceoeTXuTHE4bt7wEjgFngOYs5v0ELLaTOEX4SAJbTZFNhJMksFQXGS/BMNIGDDF/FbV0hpHD5hQrB74SPr4AA0yZMUCdrO3XgQZ56zcGXHJNxneMJjkaeEcwOelYRGTWEUyeuBIRmVsEj89eRCYBPwkGTcAOoMy1iMgcCsD7Y6WnwRsiA1MceXuCZmCkjKMI2OirZwCsyIPEN7WLlvqVsu0/kY1fpr6HRfZJ3dnAb4kt8CNQoE0x9bLsKUqk7gOtV1DoR6TU6pzImf8S0JVjiQ6tPWU1SF55lpBksyRZtRaryLFMq9SZrMVe+BVZoiW7CAyV+KMcirRLjRFa7INfkSqjyC6J78+hSLd19gBatPhEPyKbjSJ3JD7NZgDqgSxykbcr0y4XOKfFDvoR2WkUUC2cQdKxbLUZwEIXuWvSdDsr5ZoLWqzBj8gRmyKrbe6WRZ3L/LU2OdQJti/QTzopFlv8iDy2KVQvn6mOvckVl/kX2eQ4LZ+t0mLqfNTfq8SEFM2K7Wl6ZM9c5I8Dl21yzJHPr2mx3V4llsn+xm4PpJ6R6dL6NOl0kLtAWqPPbb7fIoLF0k61ag72IpFIs6KojmJZmnPKewf5H5KhUyI7XYu9riW0udlpFEhKg2KYiKi7ZKJWsYSD/PdSSKibVyrX3JaH/kBo/7uMiIiI6F38BRTvpmfpCYx6AAAAAElFTkSuQmCC" />
+  <title><%= title %></title>
+</head>
 
-          <!-- Links no lado direito com margem -->
-          <div
-            class="flex items-center space-x-4 mr-4 <% if (!logged) { %> hidden <% } %>"
-          >
-            <!-- Primeiro link -->
-            <a href="/capivara/listar" class="text-white font-semibold"
-              >Listar capivaras</a
-            >
+<body class="bg-gray-200 flex flex-col min-h-screen">
+  <header>
+    <nav class="bg-gray-800 p-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center space-x-4 ml-1">
+          <a href="/">
+            <img alt="Logo" class="w-15 h-15" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC+klEQVR4nO2ZW4hNURiAzzGIGeOapMilIZOHMSLXiUIYnDAePCAapYZ4GaNQSN4IuTSEpMSDvClGDVGUDOXBlIwHYxqM2wPj0pn5tOrfWS37nLMv58zZe9rf43/2+f/17bP22mv9JxaLiIiI6PUAM4BaYC3QJxZGgA1AN/+4CcRjQQcoBqYA84AE8Ib/KY8FDWAssA24Abw27n4q9sSCABAH1gP3HQ7c5A+wPN8ShcBd/PMdmJlPkeMOBjkXmO/guo9ASb5E2hwMUElU4Az1XI1yUHcqUAOcBRrlex3AL+AH8BZoAs7LtB/uREatSNnkqVrtjBrjgGrgKtDuceoeTXuTHE4bt7wEjgFngOYs5v0ELLaTOEX4SAJbTZFNhJMksFQXGS/BMNIGDDF/FbV0hpHD5hQrB74SPr4AA0yZMUCdrO3XgQZ56zcGXHJNxneMJjkaeEcwOelYRGTWEUyeuBIRmVsEj89eRCYBPwkGTcAOoMy1iMgcCsD7Y6WnwRsiA1MceXuCZmCkjKMI2OirZwCsyIPEN7WLlvqVsu0/kY1fpr6HRfZJ3dnAb4kt8CNQoE0x9bLsKUqk7gOtV1DoR6TU6pzImf8S0JVjiQ6tPWU1SF55lpBksyRZtRaryLFMq9SZrMVe+BVZoiW7CAyV+KMcirRLjRFa7INfkSqjyC6J78+hSLd19gBatPhEPyKbjSJ3JD7NZgDqgSxykbcr0y4XOKfFDvoR2WkUUC2cQdKxbLUZwEIXuWvSdDsr5ZoLWqzBj8gRmyKrbe6WRZ3L/LU2OdQJti/QTzopFlv8iDy2KVQvn6mOvckVl/kX2eQ4LZ+t0mLqfNTfq8SEFM2K7Wl6ZM9c5I8Dl21yzJHPr2mx3V4llsn+xm4PpJ6R6dL6NOl0kLtAWqPPbb7fIoLF0k61ag72IpFIs6KojmJZmnPKewf5H5KhUyI7XYu9riW0udlpFEhKg2KYiKi7ZKJWsYSD/PdSSKibVyrX3JaH/kBo/7uMiIiI6F38BRTvpmfpCYx6AAAAAElFTkSuQmCC" />
+          </a>
+          <a href="/">
+            <span class="text-white text-2xl font-semibold">CAPIVÁRIAS</span>
+          </a>
+        </div>
 
-            <!-- Segundo link -->
-            <a href="/capivara/cadastrar" class="text-white font-semibold"
-              >Adicionar capivaras</a
-            >
+        <!-- Links no lado direito com margem -->
+        <div class="flex items-center space-x-4 mr-4 <% if (!logged) { %> hidden <% } %>">
+          <!-- Primeiro link -->
+          <a href="/capivara/listar" class="text-white font-semibold">Listar capivaras</a>
 
-            <!-- Dropdown com a foto de perfil -->
-            <div class="relative group inline-block">
-              <div class="rounded-full overflow-hidden bg-gray-800">
-                <button
-                  class="bg-gray-800 p-2 rounded-full"
-                  aria-haspopup="true"
-                >
-                  <img
-                    src="/imagens/<%=userPhoto%>"
-                    alt="Foto de perfil"
-                    class="w-10 h-10 rounded-full"
-                  />
-                </button>
-              </div>
+          <!-- Segundo link -->
+          <a href="/capivara/cadastrar" class="text-white font-semibold">Adicionar capivaras</a>
 
-              <!-- Conteúdo do dropdown -->
-              <ul
-                class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0"
-              >
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-300"
-                    >Perfil</a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-300"
-                    >Configurações</a
-                  >
-                </li>
-                <li>
-                  <a href="/logout" class="block px-4 py-2 hover:bg-gray-300"
-                    >Sair</a
-                  >
-                </li>
-              </ul>
+          <!-- Dropdown com a foto de perfil -->
+          <div class="relative group inline-block">
+            <div class="rounded-full overflow-hidden bg-gray-800">
+              <button class="bg-gray-800 p-2 rounded-full" aria-haspopup="true">
+                <img src="/imagens/<%=userPhoto%>" alt="Foto de perfil" class="w-10 h-10 rounded-full" />
+              </button>
             </div>
+
+            <!-- Conteúdo do dropdown -->
+            <ul class="absolute hidden mt-2 space-y-2 bg-gray-200 text-gray-800 border border-gray-400 rounded-lg shadow-lg group-hover:block right-0">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Perfil</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300">Configurações</a>
+              </li>
+              <li>
+                <a href="/logout" class="block px-4 py-2 hover:bg-gray-300">Sair</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </nav>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const profileDropdown = document.querySelector(".group");
-          const dropdownContent = profileDropdown.querySelector("ul");
-
-          // Abra o dropdown quando o botão for clicado
-          profileDropdown.addEventListener("click", function () {
-            dropdownContent.classList.toggle("hidden");
-          });
-
-          // Feche o dropdown quando clicar fora dele
-          document.addEventListener("click", function (event) {
-            if (!profileDropdown.contains(event.target)) {
-              dropdownContent.classList.add("hidden");
-            }
-          });
-        });
-      </script>
-    </header>
-
-    <main class="flex-grow"><%- body %></main>
-
-    <footer class="bg-gray-800 text-white p-2">
-      <div class="container mx-auto text-center">
-        <p>&copy; <%= new Date().getFullYear() %> Pedro Henrique Lacerda</p>
       </div>
-    </footer>
-  </body>
+    </nav>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const profileDropdown = document.querySelector(".group");
+        const dropdownContent = profileDropdown.querySelector("ul");
+
+        // Abra o dropdown quando o botão for clicado
+        profileDropdown.addEventListener("click", function() {
+          dropdownContent.classList.toggle("hidden");
+        });
+
+        // Feche o dropdown quando clicar fora dele
+        document.addEventListener("click", function(event) {
+          if (!profileDropdown.contains(event.target)) {
+            dropdownContent.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </header>
+
+  <main class="flex-grow"><%- body %></main>
+
+  <footer class="bg-gray-800 text-white p-2">
+    <div class="container mx-auto text-center">
+      <p>&copy; <%= new Date().getFullYear() %> Pedro Henrique Lacerda</p>
+    </div>
+  </footer>
+</body>
+
 </html>
