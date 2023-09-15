@@ -19,6 +19,8 @@ router.get("/", function (req, res) {
     mensagem = "Email já cadastrado";
   } else if (req.query.erro == 4) {
     mensagem = "Arquivo de imagem inválido";
+  } else if (req.query.erro == 5) {
+    mensagem = "Todos os campos são obrigatórios, menos imagem";
   }
 
   res.render("cadastro", {
@@ -41,6 +43,13 @@ router.post("/", async function (req, res) {
       const rsenha = fields["rsenha"][0];
 
       // Verifica se as senhas coincidem
+      if (
+        senha.length == 0 &&
+        fields.email[0].length == 0 &&
+        fields.nome[0].length == 0
+      ) {
+        return res.redirect("/cadastro?erro=5");
+      }
       if (senha !== rsenha) {
         console.error("As senhas não coincidem.");
         return res.redirect("/cadastro?erro=2");

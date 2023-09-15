@@ -21,35 +21,26 @@ const capivaraRouter = require("./routes/capivara");
 
 const app = express();
 
-// Middleware para configurar variável global "title"
+// Middleware para configurar variável global
 app.use((req, res, next) => {
   res.locals.title = "Erro";
-  res.locals.userPhoto = "default.png";
+  //res.locals.imagem = "default.png";
   res.locals.logged = false;
+  //res.locals.nome = "a";
   next();
 });
 
-(async () => {
-  const database = require("./db");
-  try {
-    const resultado = await database.sync();
-    console.log(resultado);
-  } catch (error) {
-    console.log(error);
-  }
-})();
-
 // Configurando o formidable
-
 formidable.defaultOptions.allowEmptyFiles = true;
 formidable.defaultOptions.minFileSize = 0;
 
 // Middleware de autenticação
 function authenticationMiddleware(req, res, next) {
-  if (req.isAuthenticated() && req.user && req.user.imagem) {
-    var userPhoto = req.user.imagem;
+  if (req.isAuthenticated()) {
     res.locals.logged = true;
-    res.locals.userPhoto = userPhoto;
+    res.locals.imagem = req.session.passport.user.imagem;
+    res.locals.nome = req.session.passport.user.nome;
+    console.log(req.user);
   }
   if (req.isAuthenticated()) {
     res.locals.logged = true;

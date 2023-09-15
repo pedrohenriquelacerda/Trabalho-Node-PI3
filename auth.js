@@ -20,12 +20,16 @@ module.exports = function (passport) {
   }
 
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, { nome: user.nome, id: user.id, imagem: user.imagem });
   });
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await Usuario.findByPk(id);
+      let user = await Usuario.findAll({
+        where: {
+          id: id
+        }
+      })
       done(null, user);
     } catch (err) {
       done(err, null);
@@ -69,16 +73,15 @@ module.exports = function (passport) {
             // Se o usuário já existe, retorne o usuário existente
             return done(null, existingUser);
           } else {
-            // Gere uma senha temporária aleatória
-            const temporaryPassword = Math.random().toString(36).slice(-8);
+    
 
             // Crie um novo usuário com base no perfil do Google e senha temporária
-            const newUser = await Usuario.create({
+            const newUser = {
               nome: profile.displayName,
               email: profile.emails[0].value,
-              senha: temporaryPassword, // Use a senha temporária aqui
+              imagem: profile.photos[0].value,
               // Outros campos do usuário, se necessário
-            });
+            };
 
             // Retorne o novo usuário
             return done(null, newUser);
