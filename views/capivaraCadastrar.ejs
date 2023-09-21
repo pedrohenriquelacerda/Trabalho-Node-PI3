@@ -1,26 +1,59 @@
 <div class="max-w-md mx-auto bg-white p-4 rounded shadow-md mt-10">
-  <h2 class="text-2xl font-semibold mb-4 text-center">Cadastro de Capivara</h2>
+
+  <% if(id == undefined) { %>
+  <p class="font-semibold mb-4 text-center text-red-600 bg-red-200 p-2 rounded">
+    <span class="block">
+      Você está logado em uma conta Google que não possui um usuário cadastrado,
+      portanto, a capivara ficará sem nenhum responsável.
+    </span>
+    <span class="block mt-2">
+      Para cadastrar um usuário,
+      <a href="/cadastro" class="font-bold text-red-800 hover:underline">clique aqui</a>.
+    </span>
+  </p>
+  <% } %>
+
+  <h2 class="text-2xl font-semibold mb-4 text-center">Cadastrar Capivara</h2>
+
+  <% if(mensagem) { %>
+  <p class="font-semibold mb-4 text-center text-red-600 bg-red-200 p-2 rounded">
+    <%= mensagem %>
+  </p>
+  <% } %>
+
   <form action="/capivara/cadastrar" method="POST" enctype="multipart/form-data">
+    <!-- Div para adicionar o preview da imagem -->
     <div class="mb-4">
-      <label for="nome" class="block text-gray-700 font-semibold">Nome</label>
-      <input type="text" id="nome" name="nome" class="w-full px-4 py-2 border rounded-md" required />
+      <div class="relative w-52 h-52 mx-auto mb-2 rounded-lg overflow-hidden">
+        <input type="file" id="imagem" name="imagem" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateImagePreview(this)" />
+        <img id="imagePreview" src="/imagens/capivaraDefault.png" alt="Imagem padrão capivara" class="object-cover w-full h-full rounded-lg" />
+        <label for="imagem" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+        </label>
+      </div>
+    </div>
+    <div class="mb-4 flex">
+      <div class="w-1/2 mr-2">
+        <label for="nome" class="block text-gray-700 font-semibold">Nome</label>
+        <input type="text" id="nome" name="nome" class="w-full px-4 py-2 border rounded-md" />
+      </div>
+      <div class="w-1/2">
+        <label for="idade" class="block text-gray-700 font-semibold">Idade</label>
+        <input type="number" id="idade" name="idade" class="w-full px-4 py-2 border rounded-md" />
+      </div>
     </div>
     <div class="mb-4">
       <label for="descricao" class="block text-gray-700 font-semibold">Descrição</label>
-      <textarea id="descricao" name="descricao" rows="4" class="w-full px-4 py-2 border rounded-md" required></textarea>
-    </div>
-    <div class="mb-4">
-      <label for="idade" class="block text-gray-700 font-semibold">Idade</label>
-      <input type="number" id="idade" name="idade" class="w-full px-4 py-2 border rounded-md" required />
-    </div>
-    <div class="mb-4">
-      <label for="imagem" class="block text-gray-700 font-semibold">Imagem</label>
-      <input type="file" id="imagem" name="imagem" accept="image/*" class="w-full" required />
+      <textarea id="descricao" name="descricao" rows="4" class="w-full px-4 py-2 border rounded-md"></textarea>
     </div>
     <div class="mt-6">
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+      <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full">
         Cadastrar Capivara
       </button>
     </div>
   </form>
 </div>
+
+<script type="text/javascript" src="/javascripts/imagePreview.js"></script>

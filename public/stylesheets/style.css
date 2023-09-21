@@ -642,6 +642,14 @@ video {
   margin-top: auto;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -670,6 +678,19 @@ video {
   height: 100%;
 }
 
+.h-64 {
+  height: 16rem;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
+.h-min {
+  height: -moz-min-content;
+  height: min-content;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -688,6 +709,28 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-52 {
+  width: 13rem;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-min {
+  width: -moz-min-content;
+  width: min-content;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .max-w-md {
@@ -714,8 +757,16 @@ video {
   flex-direction: column;
 }
 
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-normal {
+  justify-content: normal;
 }
 
 .justify-center {
@@ -860,6 +911,10 @@ video {
   padding: 2rem;
 }
 
+.p-1 {
+  padding: 0.25rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -887,6 +942,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-2xl {
@@ -955,6 +1014,26 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-red-800 {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity));
+}
+
 .opacity-0 {
   opacity: 0;
 }
@@ -1001,6 +1080,10 @@ video {
 .hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .hover\:opacity-100:hover {
@@ -1084,6 +1167,10 @@ video {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
   }
 
   .md\:grid-cols-4 {

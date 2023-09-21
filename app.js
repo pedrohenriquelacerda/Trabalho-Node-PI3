@@ -38,12 +38,9 @@ formidable.defaultOptions.minFileSize = 0;
 function authenticationMiddleware(req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.logged = true;
+    res.locals.id = req.session.passport.user.id;
     res.locals.imagem = req.session.passport.user.imagem;
     res.locals.nome = req.session.passport.user.nome;
-    console.log(req.user);
-  }
-  if (req.isAuthenticated()) {
-    res.locals.logged = true;
     return next();
   }
   if (req.path == "/google/callback") return next();
@@ -95,7 +92,6 @@ app.use("/logout", logoutRouter);
 app.use("/", authenticationMiddleware, indexRouter);
 app.use("/user", authenticationMiddleware, usersRouter);
 app.use("/capivara", authenticationMiddleware, capivaraRouter);
-
 
 // Aplicação de middleware de autenticação após as rotas públicas
 app.use(authenticationMiddleware);

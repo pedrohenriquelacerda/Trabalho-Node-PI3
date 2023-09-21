@@ -11,11 +11,11 @@
 
     <form action="/cadastro" method="POST" enctype="multipart/form-data">
       <div class="relative w-32 h-32 mx-auto mb-2 rounded-full overflow-hidden">
-        <input type="file" id="profilePicture" name="imagem"
+        <input type="file" id="imagem" name="imagem"
           class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*"
-          onchange="updateProfileImage(this)" />
-        <img id="profileImage" src="/imagens/default.png" alt="" class="object-cover w-full h-full" />
-        <label for="profilePicture"
+          onchange="updateImagePreview(this)" />
+        <img id="imagePreview" src="/imagens/userDefault.png" alt="" class="object-cover w-full h-full" />
+        <label for="imagem"
           class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -57,23 +57,7 @@
     </form>
   </div>
 
-  <script>
-    function updateProfileImage(input) {
-      const profileImage = document.getElementById("profileImage");
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          profileImage.src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+  <script type="text/javascript" src="/javascripts/imagePreview.js">
 
-    document
-      .getElementById("profilePicture")
-      .addEventListener("click", function () {
-        // Abrir o diálogo de seleção de arquivo quando a imagem de perfil for clicada
-        this.value = null; // Isso permite que o mesmo arquivo seja selecionado novamente
-      });
   </script>
 </div>
