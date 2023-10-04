@@ -17,8 +17,8 @@ const Capivaras = database.define("capivaras", {
     type: Sequelize.INTEGER,
     allowNull: true,
     references: {
-      model: "usuarios", // Nome da tabela de usuários
-      key: "id", // Campo de referência na tabela de usuários
+      model: "usuarios", 
+      key: "id",
     },
   },
 });

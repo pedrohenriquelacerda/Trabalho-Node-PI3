@@ -7,9 +7,11 @@
 <div class="grid-cols-1 sm:grid md:grid-cols-4">
   <% for (let i = 0; i < capivaras.length; i++) { %>
   <div class="mx-3 mt-6 flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 sm:shrink-0 sm:grow sm:basis-0">
-    <a>
+    <% if(capivaras[i].imagem){%>
       <img class="rounded-t-lg" src="/imagens/capivara/<%= capivaras[i].imagem %>" alt="Capivara" />
-    </a>
+    <% }else{%>
+      <img class="rounded-t-lg" src="/imagens/capivaraDefault.png" alt="Capivara" />
+    <%}%>
     <div class="p-6">
       <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
         <%= capivaras[i].nome %>
@@ -33,9 +35,12 @@
         <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
           Editar
         </button>
+        <% if(capivaras[i].usuarioId == locals.id || !capivaras[i].usuarioId){ %>
+        
         <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
           Deletar
         </button>
+        <% } %>
       </div>
     </div>
   </div>
