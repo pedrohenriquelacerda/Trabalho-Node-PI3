@@ -137,7 +137,7 @@ router.get("/listar", async function (req, res, next) {
           as: "usuario",
           attributes: ["nome"],
         },
-      ], 
+      ],
     });
 
     let mensagemSucesso = null;
@@ -156,12 +156,47 @@ router.get("/listar", async function (req, res, next) {
   }
 });
 
+// Deletar capivaras
+router.get("/deletar/:id", async function (req, res, next) {
+  try {
+    const capivara = await Capivaras.findByPk(req.params.id);
+
+    if (capivara == null) {
+      return res.redirect("/capivara/listar?erro=1");
+    } else if (capivara.usuarioId != res.locals.id) {
+      return res.redirect("/capivara/listar?erro=2");
+    } else {
+      await Capivaras.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+    }
+
+    return res.redirect("/capivara/listar?erro=0");
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Editar capivaras
-router.get("/editar", function (req, res, next) {
-  res.render("capivaraEditar", {
-    title: "Editar capivara",
-    id: "",
-  });
+router.get("/editar/:id", async function (req, res, next) {
+  try {
+    const capivara = await Capivaras.findByPk(req.params.id);
+
+    if (capivara == null) {
+      return res.redirect("/capivara/listar?erro=1");
+    } else if (capivara.usuarioId != res.locals.id) {
+      return res.redirect("/capivara/listar?erro=2");
+    }
+
+    res.render("capivaraEditar", {
+      title: "Editar capivara",
+      capivara: capivara,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

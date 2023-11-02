@@ -1,6 +1,7 @@
 const database = require("../db");
 const Sequelize = require("sequelize");
-const Capivaras = require("./capivaras"); 
+const Capivaras = require("./capivaras");
+const Chat = require("./chats");
 
 const Usuarios = database.define("usuarios", {
   id: {
@@ -18,5 +19,11 @@ const Usuarios = database.define("usuarios", {
 // Defina a relação entre Usuários e Capivaras
 Usuarios.hasMany(Capivaras, { foreignKey: "usuarioId" });
 Capivaras.belongsTo(Usuarios, { foreignKey: "usuarioId" });
+
+Usuarios.hasMany(Chat, { foreignKey: "enviou_id"});
+Usuarios.hasMany(Chat, { foreignKey: "recebeu_id"});
+
+Chat.belongsTo(Usuarios, { foreignKey: "enviou_id"});
+Chat.belongsTo(Usuarios, { foreignKey: "recebeu_id",});
 
 module.exports = Usuarios;
