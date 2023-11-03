@@ -18,6 +18,7 @@ const cadastroRouter = require("./routes/cadastro");
 const googleRouter = require("./routes/google");
 const logoutRouter = require("./routes/logout");
 const capivaraRouter = require("./routes/capivara");
+const chatRouter = require("./routes/chat");
 
 const app = express();
 
@@ -92,6 +93,7 @@ app.use("/logout", logoutRouter);
 app.use("/", authenticationMiddleware, indexRouter);
 app.use("/user", authenticationMiddleware, usersRouter);
 app.use("/capivara", authenticationMiddleware, capivaraRouter);
+app.use("/chat", authenticationMiddleware, chatRouter);
 
 // Aplicação de middleware de autenticação após as rotas públicas
 app.use(authenticationMiddleware);

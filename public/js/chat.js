@@ -1,6 +1,6 @@
 let enviaMensagens = (callback) => {
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/recebemensagens");
+  xhr.open("POST", "/chat/recebemensagens");
   //xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -17,7 +17,7 @@ let enviaMensagens = (callback) => {
 
 let buscaMensagens = (callback) => {
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/buscamensagens");
+  xhr.open("POST", "/chat/buscamensagens");
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onload = () => {
     let status = xhr.status;
