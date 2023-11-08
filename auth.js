@@ -80,8 +80,11 @@ module.exports = function (passport) {
               nome: profile.displayName,
               email: profile.emails[0].value,
               imagem: profile.photos[0].value,
+              google: true
               // Outros campos do usuário, se necessário
             };
+
+            Usuario.create(newUser);
 
             // Retorne o novo usuário
             return done(null, newUser);
