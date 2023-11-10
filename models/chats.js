@@ -1,5 +1,6 @@
 const database = require("../db");
 const Sequelize = require("sequelize");
+const sequelize = require("../db");
 
 const Chats = database.define("chats", {
   id: {
@@ -27,6 +28,8 @@ const Chats = database.define("chats", {
       key: "id",
     },
   },
+
+  lida: { type: Sequelize.BOOLEAN, allowNull: false }
 });
 
 module.exports = Chats;

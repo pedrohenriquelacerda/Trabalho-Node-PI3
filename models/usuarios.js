@@ -12,8 +12,9 @@ const Usuarios = database.define("usuarios", {
   },
   nome: { type: Sequelize.STRING, allowNull: false },
   email: { type: Sequelize.STRING, allowNull: false },
-  senha: { type: Sequelize.STRING, allowNull: false },
+  senha: { type: Sequelize.STRING, allowNull: true },
   imagem: { type: Sequelize.STRING, allowNull: true },
+  google: { type: Sequelize.BOOLEAN, allowNull: true }
 });
 
 // Defina a relação entre Usuários e Capivaras
