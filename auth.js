@@ -27,9 +27,9 @@ module.exports = function (passport) {
     try {
       let user = await Usuario.findAll({
         where: {
-          id: id
-        }
-      })
+          id: id,
+        },
+      });
       done(null, user);
     } catch (err) {
       done(err, null);
@@ -73,21 +73,20 @@ module.exports = function (passport) {
             // Se o usuário já existe, retorne o usuário existente
             return done(null, existingUser);
           } else {
-    
-
             // Crie um novo usuário com base no perfil do Google e senha temporária
             const newUser = {
               nome: profile.displayName,
               email: profile.emails[0].value,
               imagem: profile.photos[0].value,
-              google: true
+              google: true,
               // Outros campos do usuário, se necessário
             };
 
-            Usuario.create(newUser);
+            // Crie o novo usuário no banco de dados e obtenha a instância do usuário criado
+            const userInstance = await Usuario.create(newUser);
 
-            // Retorne o novo usuário
-            return done(null, newUser);
+            // Retorne a instância do novo usuário
+            return done(null, userInstance.toJSON());
           }
         } catch (err) {
           return done(err, null);

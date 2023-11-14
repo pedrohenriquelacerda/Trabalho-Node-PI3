@@ -117,6 +117,7 @@ router.post("/cadastrar", async function (req, res) {
             usuarioId: res.locals.id,
           });
         }
+        console.log(res.locals.id);
         return res.redirect("/capivara/listar?erro=0");
       }
     });
