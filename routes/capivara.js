@@ -5,7 +5,7 @@ const Usuarios = require("../models/usuarios");
 const formidable = require("formidable");
 const crypto = require("crypto");
 const path = require("path");
-const fs = require("fs").promises;
+const fs = require("fs");
 
 // Cadastrar capivaras
 router.get("/cadastrar", function (req, res, next) {
@@ -274,12 +274,14 @@ router.post("/editar", async function (req, res, next) {
             __dirname,
             `../public/imagens/capivara/${capivara.imagem}`
           );
-          await fs
+
+          // Utilize fs.promises.unlink para usar promessas ao invés de callbacks
+          await fs.promises
             .unlink(caminhoImagemAntiga)
             .catch((err) => console.error(err));
         }
 
-        await fs.rename(file.filepath, newpath);
+        await fs.promises.rename(file.filepath, newpath);
 
         await Capivaras.update(
           {
