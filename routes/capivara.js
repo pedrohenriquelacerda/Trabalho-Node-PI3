@@ -242,7 +242,6 @@ router.post("/editar", async function (req, res, next) {
       const idade = fields["idade"][0];
       const descricao = fields["descricao"][0];
 
-      // Verifica se um arquivo de imagem foi enviado
       if (files.imagem[0] && files.imagem[0].size > 0) {
         const file = files.imagem[0];
 
@@ -275,7 +274,6 @@ router.post("/editar", async function (req, res, next) {
             `../public/imagens/capivara/${capivara.imagem}`
           );
 
-          // Utilize fs.promises.unlink para usar promessas ao invés de callbacks
           await fs.promises
             .unlink(caminhoImagemAntiga)
             .catch((err) => console.error(err));
