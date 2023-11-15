@@ -13,7 +13,7 @@
     </p>
     <% } %>
   
-    <h2 class="text-2xl font-semibold mb-4 text-center">Cadastrar Capivara</h2>
+    <h2 class="text-2xl font-semibold mb-4 text-center">Editar Capivara</h2>
   
     <% if(mensagem) { %>
     <p class="font-semibold mb-4 text-center text-red-600 bg-red-200 p-2 rounded">
@@ -21,12 +21,17 @@
     </p>
     <% } %>
   
-    <form action="/capivara/cadastrar" method="POST" enctype="multipart/form-data">
+    <form action="/capivara/editar" method="POST" enctype="multipart/form-data">
       <!-- Div para adicionar o preview da imagem -->
       <div class="mb-4">
         <div class="relative w-52 h-52 mx-auto mb-2 rounded-lg overflow-hidden">
-          <input type="file" id="imagem" name="imagem" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateImagePreview(this)" />
-          <img id="imagePreview" src="/imagens/capivaraDefault.png" alt="Imagem padrão capivara" class="object-cover w-full h-full rounded-lg" />
+          <% if(capivara.imagem){%>
+              <input type="file" id="imagem" name="imagem" value="<%= capivara.imagem  %>" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateImagePreview(this)" />
+              <img id="imagePreview" src="/imagens/capivara/<%= capivara.imagem  %>" alt="Imagem padrão capivara" class="object-cover w-full h-full rounded-lg" />
+            <% }else{%>
+              <input type="file" id="imagem"  name="imagem" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateImagePreview(this)" />
+              <img id="imagePreview" src="/imagens/capivaraDefault.png" alt="Imagem padrão capivara" class="object-cover w-full h-full rounded-lg" />
+            <%}%>
           <label for="imagem" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity opacity-0 hover:opacity-100 cursor-pointer rounded-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -37,17 +42,18 @@
       <div class="mb-4 flex">
         <div class="w-1/2 mr-2">
           <label for="nome" class="block text-gray-700 font-semibold">Nome</label>
-          <input type="text" id="nome" name="nome" class="w-full px-4 py-2 border rounded-md" />
+          <input type="text" id="nome" name="nome" value="<%= capivara.nome  %>" class="w-full px-4 py-2 border rounded-md" />
         </div>
         <div class="w-1/2">
           <label for="idade" class="block text-gray-700 font-semibold">Idade</label>
-          <input type="number" id="idade" name="idade" class="w-full px-4 py-2 border rounded-md" />
+          <input type="number" id="idade" name="idade" value="<%= capivara.idade  %>" class="w-full px-4 py-2 border rounded-md" />
         </div>
       </div>
       <div class="mb-4">
         <label for="descricao" class="block text-gray-700 font-semibold">Descrição</label>
-        <textarea id="descricao" name="descricao" rows="4" class="w-full px-4 py-2 border rounded-md"></textarea>
+        <textarea id="descricao" name="descricao" rows="4"  class="w-full px-4 py-2 border rounded-md"><%= capivara.descricao %></textarea>
       </div>
+      <input type="hidden" name="id" value="<%= capivara.id %>" />
       <div class="mt-6">
         <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full">
           Cadastrar Capivara

@@ -8,6 +8,10 @@
 <p class="font-semibold text-center text-green-600 bg-green-200 p-2 rounded">
   <%= mensagemSucesso %>
 </p>
+<% } %> <% if(mensagemErro) { %>
+<p class="font-semibold text-center text-red-600 bg-red-200 p-2 rounded">
+  <%= mensagemErro %>
+</p>
 <% } %>
 
 <div class="grid-cols-1 sm:grid md:grid-cols-4">
@@ -58,7 +62,12 @@
         />
         <input type="hidden" name="idCapivara" value="<%=capivaras[i].id%>" />
         <button type="submit">
-          <span class="material-icons"> chat </span>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEDElEQVR4nO2bX4hVRRzHP95MWy3FCPSti1IgLPggmLrrYoL9USsq809tW+6DYLnuawkRPfjkKppoCIJaoVJ5y/IP+CSCvltuZBiabmWyFGv+K12vDMyJy2/nnJlzzt1z7p27H5iHPXdmznx/53vm35mFEUbwnQeABcAnwCXgPPACDSD6aWAH8CdQFmkAeJAGE12Z/gXG4gEFoBXYCvxuEV2ZDtOAossV6S0aUHRZp/+AR6mzd/qKo7h+oM+S5wiePem/gE/10LZSP+Go/B14JnqMrudVB/Gq959Ejdh7PrAd+COGvXcBzxrG8DDxV8Xf3+HBk5a8EiJ+PfCLuPYmnoi2iX8fmCWu3QYm4oHogMValEm8YqO4fggPRAcsChH/3v85htq/nToXHfC8g/hhs3+hQvRvGYqOEn8P6Bb5pP2/qWfRccWPAi6IfG9Qp6IDngNuGcSvYyhPGew/AUdagG0x3umoyUm1MPX2SnxXSP7E9v+ohkTbxK8Nya/sfzGp/ftqRHTUUKfEvxtRRtpfvTaPuN7wWEQAzuhZl4pwFoR1eO9YyvWIMl/HueljwB7gjiUQS3UnOVyEdXhrLOVM9n89SQOKwE5LIM7qdbVa1VWTZ0LER9k+YLbB/s69f9JA9FYxEGHibbYP2CTKHqRKFDMIxELgZgrxJvuvoMoUHQLxY4JApBWvmCPK3wAeZpgoOgRCrcRWA6MtdbUB1xN0eJLNoo4vyYBiykBUS7zJ/svIkCeAo5bZ4zm9HRW8Ggu0TSvzDAKdCe4/O0v7h7HBEoAg/Qx8ECJ+FcmQ9v+KHDguGnFai3IJisr3dsL7jtKfvHOzf9CIftGIKcBU3UfctYhP851ursH+48mYaaIRl8Xv04F9IY5QS9c0SPt/QQ4sd9x9VYE4KfL+lGLyZLL/a+RAj2iE6uSICMJglXZrW2rB/ooToiFqHR/FPsPIYJswmdgi6jlADhT0eRvZATLMLlD2/1XUob4PZs500Qi1q+RCWhfUjP07HDtAyZOG4bE9hf33kxNbRUM+dCw3WU+WkowIBT3U5m5/DCLULq5kkv7G0K2/G/RGTIxcXNAqyvwDNJEDow1z+pnAEu2Ebx3O65QTuKBm7D8jpjjX1G6xvwzqy+REZwqRag/he2A3cCqGC2Tvfy0v+6NtHlfsWr191SScdM/RBbLTVcNpbswzNFyJ/UGIHedQ10EHF9SU/QPm682QLr00dRFrwsUFrQb7P4RHlCyzw4/F75/jGc0Ra4SC4ZzCS3hIKcQFbb7b3+aCbeLaZ3hMyTAiSPu/iMc0W3aUB3y1f5QLKtNeGoDmCBeoxVZDUDKI/9uX//ZK6gJ1hKehKMXccfaOx/XBrLv6mF5Wp9RqjiTfDUbAgftAxq49UWY8dgAAAABJRU5ErkJggg=="
+            alt="Chat"
+            width="30"
+            height="30"
+          />
         </button>
       </form>
     </div>
@@ -69,9 +78,8 @@
       <div class="mt-2 space-x-2">
         <button
           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          href="/capivara/editar/<%= capivaras[i].id %>"
         >
-          Editar
+          <a href="/capivara/editar/<%= capivaras[i].id %>">Editar</a>
         </button>
 
         <button

@@ -25,9 +25,7 @@ const app = express();
 // Middleware para configurar variável global
 app.use((req, res, next) => {
   res.locals.title = "Erro";
-  //res.locals.imagem = "default.png";
   res.locals.logged = false;
-  //res.locals.nome = "a";
   next();
 });
 
