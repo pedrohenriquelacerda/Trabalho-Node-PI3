@@ -6,7 +6,7 @@ const con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "node",
+  database: "capivarias",
 });
 
 con.connect(function (err) {
@@ -22,7 +22,7 @@ router.post("/", function (req, res) {
   res.render("chat", {
     amigoid: amigoid,
     capivaraid: capivaraid,
-    title: "Chat"
+    title: "Chat",
   });
 });
 
@@ -72,33 +72,65 @@ router.post("/buscamensagens", function (req, res) {
       if (err) throw err;
       mensagens.forEach(function (dados) {
         if (usuario_logado == dados["enviou_id"]) {
-          retorno =
-            retorno +
-            "<div class='media media-chat media-chat-reverse'>" +
-            "<img class='avatar' src=imagens/" +
-            foto_logado +
-            ">" +
-            "<div class='media-body'>" +
-            "<p>" +
-            dados["mensagem"] +
-            "</p>" +
-            "</div>" +
-            "</div>" +
-            "<div class='media media-meta-day'> </div>";
+          if (req.session.passport.user.imagem.search("https")) {
+            retorno =
+              retorno +
+              "<div class='media media-chat media-chat-reverse'>" +
+              "<img class='avatar' src=imagens/" +
+              foto_logado +
+              ">" +
+              "<div class='media-body'>" +
+              "<p>" +
+              dados["mensagem"] +
+              "</p>" +
+              "</div>" +
+              "</div>" +
+              "<div class='media media-meta-day'> </div>";
+          } else {
+            retorno =
+              retorno +
+              "<div class='media media-chat media-chat-reverse'>" +
+              "<img class='avatar' src=" +
+              foto_logado +
+              ">" +
+              "<div class='media-body'>" +
+              "<p>" +
+              dados["mensagem"] +
+              "</p>" +
+              "</div>" +
+              "</div>" +
+              "<div class='media media-meta-day'> </div>";
+          }
         } else {
-          retorno =
-            retorno +
-            "<div class='media media-chat'>" +
-            "<img class='avatar' src=imagens/" +
-            foto_amigo +
-            ">" +
-            "<div class='media-body'>" +
-            "<p>" +
-            dados["mensagem"] +
-            "</p>" +
-            "</div>" +
-            "</div>" +
-            "<div class='media media-meta-day'> </div>";
+          if (req.session.passport.user.imagem.search("https")) {
+            retorno =
+              retorno +
+              "<div class='media media-chat'>" +
+              "<img class='avatar' src=imagens/" +
+              foto_amigo +
+              ">" +
+              "<div class='media-body'>" +
+              "<p>" +
+              dados["mensagem"] +
+              "</p>" +
+              "</div>" +
+              "</div>" +
+              "<div class='media media-meta-day'> </div>";
+          } else {
+            retorno =
+              retorno +
+              "<div class='media media-chat'>" +
+              "<img class='avatar' src=" +
+              foto_amigo +
+              ">" +
+              "<div class='media-body'>" +
+              "<p>" +
+              dados["mensagem"] +
+              "</p>" +
+              "</div>" +
+              "</div>" +
+              "<div class='media media-meta-day'> </div>";
+          }
         }
       });
       res.send(JSON.stringify(retorno));

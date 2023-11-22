@@ -21,14 +21,16 @@
   >
     <% if(capivaras[i].imagem){%>
     <img
+      style="height: 500px !important"
       class="rounded-t-lg"
       src="/imagens/capivara/<%= capivaras[i].imagem %>"
       alt="Capivara"
     />
     <% }else{%>
     <img
+      style="height: 500px !important"
       class="rounded-t-lg"
-      src="/imagens/capivaraDefault.png"
+      src="/imagens/capivara/capivaraDefault.png"
       alt="Capivara"
     />
     <%}%>
@@ -44,15 +46,17 @@
       </p>
     </div>
     <div
-      class="mt-auto border-t-2 border-neutral-100 px-6 py-3 text-center dark:border-neutral-600 dark:text-neutral-50"
+      class="mt-auto border-t-2 border-neutral-100 px-6 pt-3 text-center dark:border-neutral-600 dark:text-neutral-50"
     >
       <span
         >Responsável: <% if (capivaras[i].usuarioId !== null) { %> <%=
         capivaras[i]['usuario.nome'] %> <% } else { %> Nenhum <% } %>
       </span>
     </div>
+    <% if(!(capivaras[i].usuarioId == locals.id || !capivaras[i].usuarioId)){ %>
     <div
       class="mt-auto border-t-2 border-neutral-100 px-6 py-3 text-center dark:border-neutral-600 dark:text-neutral-50"
+      style="height: 74px !important;"
     >
       <form method="POST" action="/chat">
         <input
@@ -71,9 +75,11 @@
         </button>
       </form>
     </div>
-    <% if(capivaras[i].usuarioId == locals.id || !capivaras[i].usuarioId){ %>
+    <% } %> <% if(capivaras[i].usuarioId == locals.id ||
+    !capivaras[i].usuarioId){ %>
     <div
       class="mt-auto border-t-2 border-neutral-100 px-6 py-3 text-center dark:border-neutral-600 dark:text-neutral-50"
+      style="height: 74px !important;"
     >
       <div class="mt-2 space-x-2">
         <button

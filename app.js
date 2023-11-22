@@ -61,9 +61,9 @@ app.use(
       port: "3306",
       user: "root",
       password: "",
-      database: "node",
+      database: "capivarias",
     }),
-    secret: "2C44-4D44-WppQ38S", //configure um segredo seu aqui,
+    secret: "2C44-4D44-WppQ38S",
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 30 * 60 * 1000 }, //30min

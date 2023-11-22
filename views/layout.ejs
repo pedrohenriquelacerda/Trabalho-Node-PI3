@@ -31,22 +31,39 @@
           </div>
 
           <!-- Links no lado direito com margem -->
-          <div
-            class="flex items-center space-x-4 mr-4 <% if (!logged) { %> hidden <% } %>"
-          >
+          <div class="flex items-center space-x-4 mr-4">
             <!-- Primeiro link -->
-            <a href="/capivara/listar" class="text-white font-semibold"
+            <a
+              href="/capivara/listar"
+              class="text-white font-semibold <% if (!logged) { %> hidden <% } %>"
               >Listar capivaras</a
             >
 
             <!-- Segundo link -->
-            <a href="/capivara/cadastrar" class="text-white font-semibold"
+            <a
+              href="/capivara/cadastrar"
+              class="text-white font-semibold <% if (!logged) { %> hidden <% } %>"
               >Adicionar capivaras</a
             >
 
+            <!-- Terceiro link -->
+            <a
+              href="/login"
+              class="text-white font-semibold <% if (logged) { %> hidden <% } %>"
+              >Login</a
+            >
+
+            <!-- Quarto link -->
+            <a
+              href="/cadastro"
+              class="text-white font-semibold <% if (logged) { %> hidden <% } %>"
+              >Cadastro</a
+            >
 
             <!-- Dropdown com a foto de perfil -->
-            <div class="relative group inline-block">
+            <div
+              class="relative group inline-block <% if (!logged) { %> hidden <% } %>"
+            >
               <div class="rounded-full overflow-hidden bg-gray-800">
                 <button
                   class="bg-gray-800 p-2 rounded-full"
@@ -85,7 +102,9 @@
                   >
                 </li>
                 <li>
-                  <a href="/caixaDeEntrada" class="block px-4 py-2 hover:bg-gray-300"
+                  <a
+                    href="/caixaDeEntrada"
+                    class="block px-4 py-2 hover:bg-gray-300"
                     >Mensagens</a
                   >
                 </li>
@@ -104,7 +123,7 @@
 
     <main class="flex-grow"><%- body %></main>
 
-    <footer class="bg-gray-800 text-white p-2">
+    <footer class="bg-gray-800 text-white p-2 mt-2">
       <div class="container mx-auto text-center">
         <p>&copy; <%= new Date().getFullYear() %> Pedro Henrique Lacerda</p>
       </div>

@@ -14,7 +14,7 @@ router.get("/cadastrar", function (req, res, next) {
   if (req.query.erro == 1) {
     mensagem = "Algo não deu certo";
   } else if (req.query.erro == 2) {
-    mensagem = "Os campos nome e idade são obrigatórios";
+    mensagem = "Os campos nome, idade e drescrição são obrigatórios";
   } else if (req.query.erro == 3) {
     mensagem = "Arquivo de imagem inválido";
   }
@@ -39,7 +39,7 @@ router.post("/cadastrar", async function (req, res) {
       const idade = fields["idade"][0];
       const descricao = fields["descricao"][0];
 
-      if (nome.length == 0 && idade.length == 0) {
+      if (nome.length == 0 || idade.length == 0 || descricao.length == 0) {
         return res.redirect("/capivara/cadastrar?erro=2");
       }
 
@@ -204,14 +204,22 @@ router.get("/editar/:id", async function (req, res, next) {
     const capivara = await Capivaras.findByPk(req.params.id);
 
     if (capivara == null) {
-      return res.redirect("/capivara/listar?erro=2");
+      return res.redirect("/capivara/listar?erro=4");
     } else if (capivara.usuarioId != res.locals.id) {
       return res.redirect("/capivara/listar?erro=4");
     }
 
+    let mensagem = null;
+
+    if (req.query.erro == 1) {
+      mensagem = "Algo não deu certo";
+    } else if (req.query.erro == 2) {
+      mensagem = "Os campos nome, idade e descrição são obrigatórios";
+    }
+
     res.render("capivaraEditar", {
       title: "Editar capivara",
-      mensagem: null,
+      mensagem: mensagem,
       capivara: capivara,
     });
   } catch (error) {
@@ -228,7 +236,7 @@ router.post("/editar", async function (req, res, next) {
       const capivara = await Capivaras.findByPk(capivaraId);
 
       if (capivara == null) {
-        return res.redirect("/capivara/listar?erro=2");
+        return res.redirect("/capivara/listar?erro=4");
       } else if (capivara.usuarioId != res.locals.id) {
         return res.redirect("/capivara/listar?erro=4");
       }
@@ -241,6 +249,10 @@ router.post("/editar", async function (req, res, next) {
       const nome = fields["nome"][0];
       const idade = fields["idade"][0];
       const descricao = fields["descricao"][0];
+
+      if (nome.length == 0 || idade.length == 0 || descricao.length == 0) {
+        return res.redirect(`/capivara/editar/${capivaraId}?erro=2`);
+      }
 
       if (files.imagem[0] && files.imagem[0].size > 0) {
         const file = files.imagem[0];
@@ -315,7 +327,7 @@ router.post("/editar", async function (req, res, next) {
     });
   } catch (err) {
     console.error(err);
-    res.redirect(`/capivara/editar/${req.params.id}?erro=1`);
+    res.redirect("/capivara/listar?erro=1");
   }
 });
 

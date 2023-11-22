@@ -15,6 +15,8 @@ router.get("/", (req, res, next) => {
     mensagemErro = "Erro ao realizar login!";
   } else if (req.query.erro == 0){
     mensagemSucesso = "Cadastro realizado com sucesso";
+  } else if (req.query.erro == 3){
+    mensagemErro = "Email já utilizado na conta Google. Entre utilizando a conta Google!";
   }
 
   res.render("login", { title: "Login", mensagemErro, mensagemSucesso});

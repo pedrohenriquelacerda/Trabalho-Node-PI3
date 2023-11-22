@@ -44,8 +44,8 @@ router.post("/", async function (req, res) {
 
       // Verifica se as senhas coincidem
       if (
-        senha.length == 0 &&
-        fields.email[0].length == 0 &&
+        senha.length == 0 ||
+        fields.email[0].length == 0 ||
         fields.nome[0].length == 0
       ) {
         return res.redirect("/cadastro?erro=5");
@@ -61,7 +61,11 @@ router.post("/", async function (req, res) {
       });
       if (existeUser) {
         console.error("Email já cadastrado.");
-        return res.redirect("/cadastro?erro=3");
+        if (existeUser.google) {
+          return res.redirect("/login?erro=3");
+        } else {
+          return res.redirect("/cadastro?erro=3");
+        }
       }
 
       const hashedPassword = await bcrypt.hash(senha, saltRounds);
